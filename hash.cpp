@@ -11,6 +11,7 @@
 #include <string>
 #include <iomanip>
 #include "hash.h"
+#include "scrapper.h"
 using namespace std;
 
 /*****
@@ -28,7 +29,7 @@ HASH::HASH( int x)
     item bucket;
     bucket.count=0;
     
-    tower choice("empty",0,0,"empty");
+    Scrapper choice("empty",0,0,"empty",0,"empty",0,"empty");
     bucket.my_array[0]=choice;
     bucket.my_array[1]=choice;
     bucket.my_array[2]=choice;
@@ -73,12 +74,12 @@ int HASH::gethashed(string key)
  check if the unique key address is available. if so insert single_item into the bucket
  if not display it to hash_output.txt
  ******/
-void HASH::add(tower& single_item)
+void HASH::add(Scrapper& single_item)
 {
     
     
     int index;
-    index=gethashed(single_item.return_name());
+    index=gethashed(single_item.getname());
     
     
     int x=0;
@@ -116,9 +117,9 @@ void HASH::add(tower& single_item)
             
             fstream myfile;
             myfile.open ("Hash_Output.txt", ios::out | ios::app);
-            myfile << single_item.return_name() << " " << single_item.return_age();
-            myfile << " " << single_item.return_price() << " ";
-            myfile << single_item.return_type() << endl;
+            myfile << single_item.getname() << " " << single_item.getheightft();
+            myfile << " " << single_item.getcountry() << " ";
+            myfile << single_item.getcoord() << endl;
             myfile.close();
             break;
         }
@@ -142,7 +143,7 @@ void HASH::print()
         for (int y=0; y<3; y++)
         {
             if (!ptr[x].my_array[y].empty())
-                ptr[x].my_array[y].print();
+                cout << ptr[x].my_array[y] << endl;;
         }
     }
     
@@ -170,7 +171,7 @@ void HASH::print_two()
                 {
                     cout <<"                            ";
                 }
-                ptr[x].my_array[y].print();
+                cout<<ptr[x].my_array[y]<<endl;;
             }
         }
     }
@@ -188,17 +189,17 @@ void HASH::print_two()
  object that has the same characteristics
  if found return the object, if not return a empty object
  ******/
-tower HASH::search(string name)
+Scrapper HASH::search(string name)
 {
     
     int index = gethashed(name);
     
-    tower ibrahim("empty",0,0,"empty");
+    Scrapper ibrahim("empty",0,0,"empty");
     
     for (int y =0; y<3; y++)
     {
         
-        if (ptr[index].my_array[y].return_name().length() == name.length())
+        if (ptr[index].my_array[y].getname().length() == name.length())
             return ptr[index].my_array[y];
         
     }
