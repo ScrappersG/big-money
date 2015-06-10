@@ -1,1 +1,70 @@
+#include"BinarySearchTree.h"
+#include<fstream>
+#include<iostream>
+using namespace std;
 
+void readinfile(ifstream& );
+void seperatedata(string&, string&, int&, int&, int&, int&, string&, string&, string&);
+int main()
+{
+	ifstream infile;
+	infile.open("Buildings.txt");
+	if(!infile)
+	{
+		cout << "No such file exists." << endl;
+		return 1;
+	}
+
+	readinfile(infile);
+
+	system("pause");
+	return 0;
+}
+
+void readinfile(ifstream& infile)
+{
+	//
+	string temp;
+	string na;
+	int flo = 0;
+	int yea = 0;
+	int ft = 0;
+	int m = 0;
+	string cit;
+	string coun;
+	string coor;
+
+	while(getline(infile, temp))
+	{
+		seperatedata(temp, na, flo, yea, ft, m, cit, coun, coor);
+		Scrapper data(na, ft, m, coun, flo, cit, yea, coor);
+		cout << data << endl;
+	}
+
+	infile.close();
+
+}
+
+void seperatedata(string& temp, string& na, int& flo, int& yea, int& ft, 
+					int& m, string& cit, string& coun, string& coor)
+{
+	int i = 0;
+	string floor;
+
+	na = temp.substr(0, temp.find(';'));
+	i = i + na.length() + 1;
+	cit = temp.substr(i, temp.find(';', i) - i);
+	i = i + cit.length() + 1;
+	coun = temp.substr(i, temp.find(';', i) - i);
+	i = i + coun.length() + 1;
+	m = atoi(temp.substr(i, temp.find(';', i) - i).c_str());
+	i = i + temp.substr(i, temp.find(';', i) - i).length() + 1;
+	ft = atoi(temp.substr(i, temp.find(';', i) - i).c_str());
+	i = i + temp.substr(i, temp.find(';', i) - i).length() + 1;
+	flo = atoi(temp.substr(i, temp.find(';', i) - i).c_str());
+	i = i + temp.substr(i, temp.find(';', i) - i).length() + 1;
+	yea = atoi(temp.substr(i, temp.find(';', i) - i).c_str());
+	i = i + temp.substr(i, temp.find(';', i) - i).length() + 1; 
+	coor = temp.substr(i, temp.length() - i - 1);
+
+}
