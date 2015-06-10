@@ -1,13 +1,16 @@
 //
-//  hash.cpp
+//  hash.h
 //  group ibrahim part
 //
 //  Created by ibrahim ibrahim on 6/9/15.
 //  Copyright (c) 2015 ibrahim ibrahim. All rights reserved.
 //
 
+#ifndef __group_ibrahim_part__hash__
+#define __group_ibrahim_part__hash__
+
 #include <stdio.h>
-#include "tower.h"
+#include "scrapper.h"
 #include <string>
 
 using namespace std;
@@ -27,7 +30,7 @@ private:
     {
         
         int count; // keeps count for bucket
-        tower my_array[3]; // array of objects in bucket
+        Scrapper my_array[3]; // array of objects in bucket
     };
     
     item* ptr;
@@ -52,8 +55,8 @@ public:
     
     // hash table operations
     int gethashed(string key);
-    void add (tower&);
-    tower search(string name);
+    void add (Scrapper&);
+    Scrapper search(string name);
     void print();
     void print_two();
     
@@ -63,3 +66,7 @@ public:
     
     
 };
+
+
+
+#endif /* defined(__group_ibrahim_part__hash__) */
