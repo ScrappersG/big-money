@@ -47,9 +47,9 @@ public:
 	//operators
 	friend ostream &operator << (ostream& output, const Scrapper& right)
 	{
-		output << right.getname() << "\n\t" << right.getcountry() << "\n\t" << right.getcity() << "\n\t" <<
-				 right.getfloors() << "\n\t" << right.getheightm() << " \n\t" << right.getheightft()
-					<< "\n\t" << right.getcoord() << endl;
+		output << right.getname() << " " << right.getcountry() << " " << right.getcity() << " " <<
+				 right.getfloors() << " " << right.getheightm() << "  " << right.getheightft()
+					<< " " << right.getcoord() << endl;
 		return output;
 	}
 
