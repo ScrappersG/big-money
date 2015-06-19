@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 #include "scrapper.h"
+#include "linkedlist.h"
 #include <string>
 
 using namespace std;
-
 
 class HASH
 {
@@ -26,16 +26,18 @@ private:
     int fullbucket;
     
     // delcare a struct for the hash table
-    struct item
+    struct bucket
     {
-        
         int count; // keeps count for bucket
-        Scrapper my_array[3]; // array of objects in bucket
+        Scrapper * my_array[3]; // array of objects in bucket
     };
+
+    bucket* ptr;
     
-    item* ptr;
     
-    
+    linklist* rejected;
+
+	
 public:
     
     // constructor
@@ -44,26 +46,41 @@ public:
     // destructor
     ~HASH();
     
-    
     // member function all return data from hash
     int return_hashsize(){return hashtablesize;}
     int return_collisions(){return  collisions;}
     int return_buc_two(){return fullbucket;}
-    int return_load(){return load;}
+    
     int empty_buckets();
+    int getload();
     
     
     // hash table operations
     int gethashed(string key);
-    void add (Scrapper&);
-    Scrapper search(string name);
+    bool add (Scrapper*);
+    
+    //search function
+    Scrapper *search(string name);
+    
+    //remove function
+    bool remove(string name);
+    
+    //both prints
     void print();
-    void print_two();
+    void print_index();
     
+    // print overflow from hash table
+    void print_overflow(){rejected->print();}
     
+    // return count from linked list
+    int count(){return rejected->return_count();}
     
+    //rehashing function
+   void rehash(int hashsize);
     
-    
+    // delete pointers for hash, inorder to rehash
+    void deletehashptr();
+	
     
 };
 
